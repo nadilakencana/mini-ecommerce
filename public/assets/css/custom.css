@@ -1,0 +1,33 @@
+.w-c {
+    height: 2rem;
+    width: 2rem;
+}
+.varian-warna-product, .varian-size-product {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+.item-color, .item-size {
+    display: flex;
+    gap: 8px;
+}
+.product {
+    display: flex;
+    padding: 10px;
+    gap: 10px;
+    align-items: center;
+    width: 50%;
+    justify-content: space-evenly;
+}
+.image-product {
+    width: 100px;
+    height: 100px;
+}
+img.Image-product {
+    width: 100%;
+    border-radius: 10px;
+    height: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
