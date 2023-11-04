@@ -40,6 +40,12 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+
+        'admins' => [
+            'driver' => 'session', // Anda bisa menggunakan 'token' jika ingin autentikasi berbasis token
+            'provider' => 'admins', // Ini mengacu pada konfigurasi 'providers' di bawah
+        ],
+
     ],
 
     /*
@@ -69,6 +75,12 @@ return [
         //     'driver' => 'database',
         //     'table' => 'users',
         // ],
+
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Admin::class,
+        ],
+
     ],
 
     /*
@@ -111,5 +123,7 @@ return [
     */
 
     'password_timeout' => 10800,
+
+
 
 ];

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DasboardAdminController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\ProductController;
@@ -19,6 +20,15 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::controller(AuthController::class)->group(function(){
+    Route::get('/login', 'login')->name('login');
+    Route::get('/registrasi', 'regist')->name('regist');
+    Route::post('/post-login', 'postlogin')->name('post-login');
+    Route::post('/post-regist', 'pushRegist')->name('post-regist');
+    Route::get('/logout', 'logoutAdmin')->name('logout_admin');
+});
+
 
 Route::controller(DasboardAdminController::class)->group(function(){
     Route::get('/dashboard', 'Dasboard')->name('dasboard');
