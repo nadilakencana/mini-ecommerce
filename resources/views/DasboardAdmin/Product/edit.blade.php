@@ -87,7 +87,7 @@
                                             @foreach ($product->warna as $k => $color )
                                                 <div class="item-color" xid="{{ $k }}">
                                                     <div class="btn btn-danger itm-color" xid="{{ $k }}"><i class="bi bi-trash"></i></div>
-                                                    <input type="text" class="form-control @error('color') is-invalid @enderror"
+                                                    <input type="text" class="form-control color @error('color') is-invalid @enderror"
                                                     name="color[{{ $k }}][warna]" xid="{{ $k }}" value="{{ $color->warna }}">
                                                     <input type="hidden" name="color[{{ $k }}][id]" value="{{ $color->id }}" style="display: none" xid="{{ $k }}">
                                                     @error("color")
@@ -111,7 +111,7 @@
                                             @foreach ($product->ukuran as $j => $size )
                                                 <div class="item-size" xid="{{ $j }}">
                                                     <div class="btn btn-danger itm-size" xid="{{ $j }}"><i class="bi bi-trash"></i></div>
-                                                    <input type="text" class="form-control @error('size') is-invalid @enderror" value="{{ $size->ukuran }}" name="size[{{ $j }}][ukuran]" xid="{{ $j }}">
+                                                    <input type="text" class="form-control size @error('size') is-invalid @enderror" value="{{ $size->ukuran }}" name="size[{{ $j }}][ukuran]" xid="{{ $j }}">
                                                     <input type="hidden" name="size[{{ $j }}][id]" value="{{ $size->id }}" style="display: none" xid="{{ $j }}">
                                                     @error("size")
                                                         <small class="invalid-feedback">{{ $message }}</small>
@@ -183,6 +183,32 @@
             var id = $(this).attr('xid');
             removeSize(id);
         });
+
+        $('.varian-size-product .item-size input.size').on('input', function(){
+            var value = $(this).val();
+            var xid = $(this).attr('xid');
+
+            var $target = $(`.varian-size-product input[name="size[${xid}][ukuran]"]`);
+            if($target.length){
+                console.log('target di temukan');
+                $target.val(value);
+            }else{
+                console.log('target tidak ada');
+            }
+        });
+
+        $('.varian-warna-product .item-color input.color').on('input', function(){
+            var value = $(this).val();
+            var xid = $(this).attr('xid');
+
+            var $target = $(`.varian-warna-product input[name="color[${xid}][warna]"]`);
+            if($target.length){
+                console.log('target di temukan');
+                $target.val(value);
+            }else{
+                console.log('target tidak ada');
+            }
+        })
 
         function addColor(xid){
             var $form = $('.card-body .form');

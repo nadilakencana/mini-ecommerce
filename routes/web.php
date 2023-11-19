@@ -46,6 +46,8 @@ Route::middleware(['admins'])->group(function () {
     });
 
     Route::resource('product', ProductController::class);
+    Route::get('product-delete/{id}', [ProductController::class, 'destroy'])->name('delete-product');
+
 
     Route::controller(OrderController::class)->group(function(){
         Route::get('order', 'DataOrders')->name('data-order');
