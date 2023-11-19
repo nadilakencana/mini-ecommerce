@@ -60,7 +60,8 @@
                                 </td>
                                 <td>
                                     <div class="d-flex">
-                                        <a href="" class="btn btn-success mx-2">Detail</a>
+                                        <div  class="btn btn-success mx-2 block detail"
+                                        data-bs-toggle="modal" data-bs-target="#default-{{ $pro->id }}">Detail</div>
                                         <a href="{{ route('product.edit', encrypt($pro->id)) }}" class="btn btn-primary mx-2">Edit</a>
                                         <form action="{{ route('product.destroy', encrypt($pro->id)) }}" method="post">
                                             @csrf
@@ -68,6 +69,70 @@
                                             <button type="submit" class="btn btn-danger">Hapus</button>
                                         </form>
 
+                                    </div>
+                                    <div class="modal fade text-left" id="default-{{ $pro->id }}" tabindex="-1" role="dialog"
+                                        aria-labelledby="myModalLabel1" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-scrollable" role="document">
+                                            <div class="modal-content" style="width: 600px">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="myModalLabel1">Detail Product</h5>
+                                                    <button type="button" class="close rounded-pill" data-bs-dismiss="modal"
+                                                        aria-label="Close">
+                                                        <i data-feather="x"></i>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="detail-product">
+                                                        <div class="row">
+                                                            <div class="data-product d-flex gap-4">
+                                                                <label for="" style="width: 50%">Name Product</label>
+                                                                <div class="dt-product">: {{ $pro->nama }}</div>
+                                                            </div>
+                                                            <div class="data-product d-flex gap-4">
+                                                                <label for="" style="width: 50%">Category Product</label>
+                                                                <div class="dt-product">: {{ $pro->kategori->nama }}</div>
+                                                            </div>
+                                                            <div class="data-product d-flex gap-4">
+                                                                <label for="" style="width: 50%">Price Product</label>
+                                                                <div class="dt-product">: Rp. {{number_format( $pro->harga, 0, ',','.')}}</div>
+                                                            </div>
+                                                            <div class="data-product d-flex gap-4">
+                                                                <label for="" style="width: 50%">Color Product</label>
+                                                                <div class="dt-product">:
+                                                                    <ul>
+                                                                        @foreach ($pro->warna as $color )
+                                                                            <li>{{ $color->warna }}</li>
+                                                                        @endforeach
+
+                                                                    </ul>
+                                                                </div>
+
+                                                            </div>
+                                                            <div class="data-product d-flex gap-4">
+                                                                <label for="" style="width: 50%">Size Product</label>
+                                                                <div class="dt-product">:
+                                                                    <ul>
+                                                                        @foreach ($pro->ukuran as $size )
+                                                                            <li>{{ $size->ukuran }}</li>
+                                                                        @endforeach
+
+                                                                    </ul>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn" data-bs-dismiss="modal">
+                                                        <i class="bx bx-x d-block d-sm-none"></i>
+                                                        <span class="d-none d-sm-block">Close</span>
+                                                    </button>
+
+
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </td>
                             </tr>
