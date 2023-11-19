@@ -17,7 +17,7 @@ class DetailOrder extends Model
     }
 
     public function variasiUkuran(){
-        return $this->belongsTo(VariasiWarna::class, 'id_ukuran', 'id');
+        return $this->belongsTo(VariasiUkuran::class, 'id_ukuran', 'id');
     }
     public function variasiWarna(){
         return $this->belongsTo(VariasiWarna::class, 'id_warna', 'id');

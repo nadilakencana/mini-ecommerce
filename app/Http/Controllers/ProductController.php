@@ -161,9 +161,17 @@ class ProductController extends Controller
                 foreach($var_warna as $color){
                     if(array_key_exists('id', $color)){
                         $var_wr = VariasiWarna::where('id', $color['id'])->first();
-                        $var_wr->warna = $color['warna'];
-                        $var_wr->id_product = $product->id;
-                        $var_wr->save();
+                        //dd($var_wr);
+                        if($color['warna'] === 'deleted'){
+
+                            $var_wr->delete();
+
+                        }else{
+                            $var_wr->warna = $color['warna'];
+                            $var_wr->id_product = $product->id;
+                            $var_wr->save();
+                        }
+
                     }else{
                         $var_wr = new VariasiWarna();
                         $var_wr->warna = $color['warna'];
@@ -174,15 +182,20 @@ class ProductController extends Controller
                 }
 
             }
+
             if($request->has('size')){
                 $var_ukuran = $request->size;
 
                 foreach($var_ukuran as $size){
                     if(array_key_exists('id', $size)){
                         $var_uk = VariasiUkuran::where('id', $size['id'])->first();
-                        $var_uk->ukuran = $size['ukuran'];
-                        $var_uk->id_product = $product->id;
-                        $var_uk->save();
+                        if($size['ukuran'] === 'deleted'){
+                            $var_uk -> delete();
+                        }else{
+                            $var_uk->ukuran = $size['ukuran'];
+                            $var_uk->id_product = $product->id;
+                            $var_uk->save();
+                        }
                     }else{
                         $var_uk = new VariasiUkuran();
                         $var_uk->ukuran = $size['ukuran'];

@@ -33,7 +33,7 @@
                     </a>
                 </li>
                 <li class="sidebar-item  ">
-                    <a href="index.html" class='sidebar-link'>
+                    <a href="{{ route('data-order') }}" class='sidebar-link'>
                        <i class="bi bi-cart2"></i>
                         <span>Orders</span>
                     </a>

@@ -89,11 +89,14 @@
                                                     <div class="btn btn-danger itm-color" xid="{{ $k }}"><i class="bi bi-trash"></i></div>
                                                     <input type="text" class="form-control @error('color') is-invalid @enderror"
                                                     name="color[{{ $k }}][warna]" xid="{{ $k }}" value="{{ $color->warna }}">
-                                                    <input type="text" name="color[{{ $k }}][id]" value="{{ $color->id }}" style="display: none">
+                                                    <input type="hidden" name="color[{{ $k }}][id]" value="{{ $color->id }}" style="display: none" xid="{{ $k }}">
                                                     @error("color")
                                                         <small class="invalid-feedback">{{ $message }}</small>
                                                     @enderror
                                                 </div>
+                                                <input type="text" name="color[{{ $k }}][id]" value="{{ $color->id }}" style="display: none" xid="{{ $k }}">
+                                                <input type="text" class="" name="color[{{ $k }}][warna]" xid="{{ $k }}" value="{{ $color->warna }}" style="display: none">
+
                                             @endforeach
                                         </div>
                                     </div>
@@ -108,12 +111,15 @@
                                             @foreach ($product->ukuran as $j => $size )
                                                 <div class="item-size" xid="{{ $j }}">
                                                     <div class="btn btn-danger itm-size" xid="{{ $j }}"><i class="bi bi-trash"></i></div>
-                                                    <input type="text" class="form-control @error('size') is-invalid @enderror" name="size[{{ $j }}][ukuran]" xid="{{ $j }}">
-                                                    <input type="text" name="size[{{ $j }}][id]" value="{{ $size->id }}" style="display: none">
+                                                    <input type="text" class="form-control @error('size') is-invalid @enderror" value="{{ $size->ukuran }}" name="size[{{ $j }}][ukuran]" xid="{{ $j }}">
+                                                    <input type="hidden" name="size[{{ $j }}][id]" value="{{ $size->id }}" style="display: none" xid="{{ $j }}">
                                                     @error("size")
                                                         <small class="invalid-feedback">{{ $message }}</small>
                                                     @enderror
                                                 </div>
+                                                <input type="text" name="size[{{ $j }}][id]" value="{{ $size->id }}" style="display: none" xid="{{ $j }}">
+                                                <input type="text"  value="{{ $size->ukuran }}" name="size[{{ $j }}][ukuran]" xid="{{ $j }}" style="display: none">
+
                                             @endforeach
 
                                         </div>
@@ -213,12 +219,14 @@
             var $form = $('.card-body .form');
             var $target = $form.find('.varian-warna-product');
             $target.find(`.item-color[xid="${idx}"]`).remove();
+            $target.find(`input[xid="${idx}"][name="color[${idx}][warna]"]`).val('deleted');
         }
 
         function removeSize(idx){
             var $form = $('.card-body .form');
             var $target = $form.find('.varian-size-product');
             $target.find(`.item-size[xid="${idx}"]`).remove();
+            $target.find(`input[xid="${idx}"][name="size[${idx}][ukuran]"]`).val('deleted');
         }
 
     });
