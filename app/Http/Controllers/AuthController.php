@@ -67,4 +67,54 @@ class AuthController extends Controller
 
         return redirect('/login');
     }
+
+    //auth User
+
+    public function LoginUser(){
+        return view('FrontEndUser.Auth.login_user');
+    }
+    public function Registrasi(){
+        return view('FrontEndUser.Auth.registrasi_user');
+    }
+
+    public function PostLoginUser(Request $request){
+         $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+        ]);
+
+        if (Auth::guard('web')->attempt($credentials)) {
+            $request->session()->regenerate();
+
+            return redirect()->intended('/');
+        }
+
+        return back()->withErrors([
+            'email' => 'The provided credentials do not match our records.',
+        ])->onlyInput('email');
+    }
+
+    public function PostRegistUser(Request $request){
+
+        $request->validate([
+            'name' => ['required','string','max:255'],
+            'email' => ['required','string','max:255','unique:users'],
+            'no_hp' => ['required'],
+            'alamat' => ['required'],
+            'password' => ['required'],
+
+        ]);
+        // dd($request);
+        $user = User::create([
+
+            'name' => $request->name,
+            'email' => $request->email,
+            'no_hp' => $request->no_hp,
+            'alamat' => $request->alamat,
+            'password' => bcrypt($request->password),
+
+        ]);
+
+        return redirect()->route('login-user')->with('Success','Selamat Anda Sudah Terdaftar');
+    }
 }

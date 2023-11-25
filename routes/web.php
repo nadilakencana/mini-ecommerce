@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DasboardAdminController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
@@ -18,16 +19,27 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
 
 Route::controller(AuthController::class)->group(function(){
-    Route::get('/login', 'login')->name('login');
-    Route::get('/registrasi', 'regist')->name('regist');
-    Route::post('/post-login', 'postlogin')->name('post-login');
-    Route::post('/post-regist', 'pushRegist')->name('post-regist');
-    Route::get('/logout', 'logoutAdmin')->name('logout_admin');
+    Route::get('/login-admin', 'login')->name('login');
+    Route::get('/registrasi-admin', 'regist')->name('regist');
+    Route::post('/post-login-admin', 'postlogin')->name('post-login');
+    Route::post('/post-regist-admin', 'pushRegist')->name('post-regist');
+    Route::get('/logout-admin', 'logoutAdmin')->name('logout_admin');
+    Route::get('/login', 'LoginUser')->name('login-user');
+    Route::get('register', 'Registrasi')->name('Regist-user');
+    Route::post('post-login', 'PostLoginUser')->name('Post_login');
+    Route::post('post-regist', 'PostRegistUser')->name('Post_regist');
+
+});
+
+
+Route::controller(HomeController::class)->group(function(){
+    Route::get('/', 'home')->name('Home');
+    Route::get('all-product', 'allProduct')->name('all_product');
+    Route::get('category-product/{slug}', 'categoryProduct')->name('product_cat');
+    Route::get('Detail-product/{slug}', 'DetailPro')->name('detail_product');
 });
 
 
@@ -48,9 +60,10 @@ Route::middleware(['admins'])->group(function () {
     Route::resource('product', ProductController::class);
     Route::get('product-delete/{id}', [ProductController::class, 'destroy'])->name('delete-product');
 
+    Route::get('data-order', [OrderController::class, 'DataOrders'])->name('data-order');
 
     Route::controller(OrderController::class)->group(function(){
-        Route::get('order', 'DataOrders')->name('data-order');
+        Route::get('data-order', 'DataOrders')->name('data-order');
         Route::get('detail-order/{id}', 'DetailsOrder')->name('detail-order');
         Route::post('accept-order/{id}', 'AcceptOrder')->name('AcceptOrder');
         Route::post('finish-order/{id}', 'Finish')->name('Finish');

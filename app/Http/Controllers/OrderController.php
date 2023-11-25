@@ -9,9 +9,9 @@ class OrderController extends Controller
 {
     public function DataOrders(){
         $order = Order::all();
-        $orders = Order::findOrFail(1);
-        $itmOrder = DetailOrder::where('id_order', $orders->id)->get();
-        return view('DasboardAdmin.Order.index', compact('order', 'orders', 'itmOrder'));
+        // $orders = Order::findOrFail(1);
+        // $itmOrder = DetailOrder::where('id_order', $orders->id)->get();
+        return view('DasboardAdmin.Order.index', compact('order'));
     }
 
     public function DetailsOrder($id){

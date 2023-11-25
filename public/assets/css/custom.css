@@ -1,6 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Open+Sans:wght@500&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;1,100;1,200;1,400;1,500&display=swap');
+
+.body{
+    background-color: white;
+    font-family: 'Poppins', sans-serif;
+
+}
+
+.cl-grey{
+    color: #607080;
+}
+.cl-dark{
+       color: rgb(43 37 37);
+}
+
+.f-w-1{
+    font-weight: 500;
+}
+.f-w-2{
+    font-weight: 600;
+}
+.f-w-3{
+    font-weight: 800;
+}
+.cl-white{
+       color: rgb(243, 241, 241);
+}
+
 .w-c {
     height: 2rem;
     width: 2rem;
+}
+a{
+    text-decoration: none;
+}
+ul.menu {
+    list-style: none;
+    padding-left: 0;
 }
 .varian-warna-product, .varian-size-product {
     display: flex;
@@ -31,3 +66,65 @@ img.Image-product {
     background-repeat: no-repeat;
     background-position: center;
 }
+
+/* login user */
+.image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 464px;
+    height: auto;
+}
+.image .image-login {
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    object-fit: cover;
+}
+/* end login */
+
+/* content customer */
+.container.content-home{
+    background-color: white;
+}
+/* section home-prduct */
+.label-header-section.p-2 {
+    /* background-color: #2b2a2a; */
+    border-radius: 9px;
+    color: white;
+}
+.image-card.mb-3 {
+    width: 100%;
+    height: 200px;
+}
+img.img-card {
+    object-fit: scale-down;
+    width: 100%;
+    height: 100%;
+    background: no-repeat;
+}
+/* end section home-product */
+/* detail product */
+.image-pro {
+    width: 80%;
+    max-width: 400px;
+    height: 80%;
+    padding-bottom: 60%;
+    position: relative;
+    overflow: hidden;
+}
+.image-pro .img-itm-pro {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 3%;
+    -webkit-border-radius: 3%;
+    -moz-border-radius: 3%;
+    -ms-border-radius: 3%;
+    -o-border-radius: 3%;
+}
+/* end detail product */
+/* end content customer */
