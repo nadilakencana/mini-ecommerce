@@ -108,8 +108,8 @@ img.img-card {
 .image-pro {
     width: 80%;
     max-width: 400px;
-    height: 80%;
-    padding-bottom: 60%;
+    height: auto;
+    padding-bottom: 100%;
     position: relative;
     overflow: hidden;
 }
@@ -125,6 +125,11 @@ img.img-card {
     -moz-border-radius: 3%;
     -ms-border-radius: 3%;
     -o-border-radius: 3%;
+}
+.active{
+    border: none;
+    background-color: rgb(22, 22, 22);
+    color: white;
 }
 /* end detail product */
 /* end content customer */

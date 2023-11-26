@@ -8,7 +8,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 cl-dark">
                 <li class="nav-item">
-                    <a class="nav-link active cl-dark" aria-current="page" href="{{ route('Home') }}">Home</a>
+                    <a class="nav-link cl-dark" aria-current="page" href="{{ route('Home') }}">Home</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link cl-dark" href="{{ route('all_product') }}">All product</a>

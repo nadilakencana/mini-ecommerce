@@ -53,7 +53,7 @@
                                     </div>
                                 </td>
                                 <td>
-                                    {{ $pro->harga}}
+                                   Rp. {{number_format( $pro->harga, 0, ',','.')}}
                                 </td>
                                 <td>
                                     {{ $pro->kategori->nama}}
@@ -63,9 +63,9 @@
                                         <div  class="btn btn-success mx-2 block detail"
                                         data-bs-toggle="modal" data-bs-target="#default-{{ $pro->id }}">Detail</div>
                                         <a href="{{ route('product.edit', encrypt($pro->id)) }}" class="btn btn-primary mx-2">Edit</a>
-                                        
+
                                         <a href="{{ route('delete-product', encrypt($pro->id)) }}" class="btn btn-danger">Hapus</a>
-                                        
+
 
                                     </div>
                                     <div class="modal fade text-left" id="default-{{ $pro->id }}" tabindex="-1" role="dialog"
