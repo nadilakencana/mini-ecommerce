@@ -13,6 +13,19 @@ class Product extends Model
     protected $guarded = [];
     public $timestamps = true;
 
+
+    public function scopeFilter($query, array $filters){
+
+        $query->when($filters['search'] ?? false, function($query, $search){
+
+            return $query->where('nama', 'LIKE','%'. $search .'%');
+        });
+
+    }
+
+
+
+
     public function kategori(){
         return $this->belongsTo(Kategori::class, 'id_kategori', 'id');
     }

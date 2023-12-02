@@ -15,4 +15,8 @@ class Order extends Model
     public function user(){
         return $this->belongsTo(User::class, 'id_user', 'id');
     }
+
+    public function details(){
+        return $this->hasMany(DetailOrder::class, 'id_order', 'id');
+    }
 }

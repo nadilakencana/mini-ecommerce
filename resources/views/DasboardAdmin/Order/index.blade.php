@@ -43,7 +43,7 @@
                         $no = 1;
                         @endphp
 
-                        {{--  @foreach ($order as $orders )
+                        @foreach ($order as $orders )
                         <tr>
                             <td>{{ $no++ }}</td>
                             <td>{{ $orders->kode_order }}</td>
@@ -97,7 +97,7 @@
                             </div>
                         </tr>
 
-                        @endforeach  --}}
+                        @endforeach
 
                     </tbody>
                 </table>

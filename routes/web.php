@@ -1,11 +1,13 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\DasboardAdminController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProfileUserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -40,6 +42,20 @@ Route::controller(HomeController::class)->group(function(){
     Route::get('all-product', 'allProduct')->name('all_product');
     Route::get('category-product/{slug}', 'categoryProduct')->name('product_cat');
     Route::get('Detail-product/{slug}', 'DetailPro')->name('detail_product');
+});
+
+Route::controller(CartController::class)->group(function(){
+    Route::get('detail-cart', 'detailCart')->name('cart');
+    Route::post('add-to-cart', 'addtoCart')->name('AddToCart');
+    Route::post('delete-item-cart', 'deleteCart')->name('delete-itm-cart');
+    Route::post('cekout-cart', 'cekout')->name('cekout');
+});
+
+Route::middleware(['user'])->group(function(){
+    Route::controller(ProfileUserController::class)->group(function(){
+        Route::get('profile', 'profile')->name('user_profile');
+        Route::post('update-profile/{id}', 'updateProfile')->name('updateProfile');
+    });
 });
 
 

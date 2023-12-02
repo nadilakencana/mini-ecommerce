@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Auth;
 
 class CustomerMiddleware
 {
@@ -15,6 +16,9 @@ class CustomerMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
+        if(!Auth::guard('web')->check(['email' => $request->email, 'password' => $request->password])){
+            return redirect()->route('login-user');
+        }
         return $next($request);
     }
 }

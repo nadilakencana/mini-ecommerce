@@ -19,19 +19,19 @@
                     <div class="varian-warna d-flex gap-3 mb-3 align-items-center">
                         <label for="">Product Color:</label>
                         @foreach ($warna as $color)
-                            <button class="btn btn-outline-dark color" onclick="btnActiveColor(this, 'color')">{{ $color->warna }}</button>
+                            <button class="btn btn-outline-dark color" onclick="btnActiveColor(this, 'color')" xid="{{ $color->id }}">{{ $color->warna }}</button>
                         @endforeach
 
                     </div>
                     <div class="varian-size d-flex gap-3 mb-3 align-items-center">
                         <label for="">Product Size:</label>
                         @foreach ($ukuran as $size)
-                            <button class="btn btn-outline-dark size" onclick="btnActiveColor(this, 'size')">{{ $size->ukuran }}</button>
+                            <button class="btn btn-outline-dark size" onclick="btnActiveColor(this, 'size')" xid="{{ $size->id }}">{{ $size->ukuran }}</button>
                         @endforeach
 
                     </div>
                     <div class="detail mt-5 mb-3">
-                        <p class=".cl-grey">{{ $pro_detail->deskripsi }}</p>
+                        <p class="cl-grey">{{ $pro_detail->deskripsi }}</p>
                     </div>
                     <div class="footer-card d-flex justify-content-between">
                         <div class="qty-controll" id="qty">
@@ -41,7 +41,7 @@
                         </div>
                        @auth
                         <div class="cekout-btn">
-                            <div class="btn btn-dark" style="width: 250px">Order Now</div>
+                            <div class="btn btn-dark addtocart" xid="{{ $pro_detail->id }}" style="width: 250px">Order Now</div>
                         </div>
                         @else
                         <a href="{{ route('login-user') }}">
@@ -102,6 +102,7 @@
 @stop
 @section('script')
 <script>
+    //action on click
     document.addEventListener('DOMContentLoaded', function () {
       var quantityInput = document.getElementById('quantity-input');
       var decreaseButton = document.getElementById('quantity-decrease');
@@ -120,10 +121,50 @@
       });
     });
 
+    $('.cekout-btn .addtocart').on('click', function(){
+        var xid = $(this).attr('xid');
+
+        addToCart(xid);
+
+    })
+
+
+
+//function
+    function addToCart(id){
+        var qty = $('.qty-input').val();
+        var id_warna = $('.varian-warna .color.active-btn').attr('xid');
+        var warna = $('.varian-warna .color.active-btn').text();
+        var id_ukuran = $('.varian-size .size.active-btn').attr('xid');
+        var size = $('.varian-size .size.active-btn').text();
+
+        var postData = {
+            _token : "{{ csrf_token() }}",
+            id: id,
+            qty: qty,
+            id_ukuran: id_ukuran,
+            ukuran: size,
+            id_warna: id_warna,
+            warna: warna
+        }
+        console.log(postData)
+
+        $.post('{{ route("AddToCart") }}', postData).done(function(data){
+                if(data.success === 0){
+                    console.log('add to cart local',postData);
+                    alert(data.message);
+                }else{
+                    $(this).attr('data-notify', data['count']);
+                    location.reload();
+                }
+            }).fail(function(data){
+                console.log('error', data);
+            });
+    }
 
     function btnActiveColor(button, type) {
 
-        button.classList.toggle('active');
+        button.classList.toggle('active-btn');
 
         if(type === 'color'){
             var buttons = document.querySelectorAll('.varian-warna .color');
@@ -132,7 +173,7 @@
         }
         for (var i = 0; i < buttons.length; i++) {
             if (buttons[i] !== button) {
-                buttons[i].classList.remove('active');
+                buttons[i].classList.remove('active-btn');
             }
         }
     }
