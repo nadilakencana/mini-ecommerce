@@ -28,6 +28,7 @@
         <div class="list-pannel d-flex gap-3 mb-3 mt-3">
             <div class="btn btn-dark box-pannel" order="1" target="panel1">Update Data</div>
             <div class="btn btn-dark box-pannel" order="2" target="panel2">History Order</div>
+            <a href="{{ route('logout-user') }}"><div class="btn btn-dark">Logout</div></a>
         </div>
     </div>
     <div class="tab-panel">

@@ -33,6 +33,7 @@ Route::controller(AuthController::class)->group(function(){
     Route::get('register', 'Registrasi')->name('Regist-user');
     Route::post('post-login', 'PostLoginUser')->name('Post_login');
     Route::post('post-regist', 'PostRegistUser')->name('Post_regist');
+    Route::get('logout', 'logoutUser')->name('logout-user');
 
 });
 

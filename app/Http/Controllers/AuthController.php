@@ -65,7 +65,7 @@ class AuthController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/login');
+        return redirect('/login-admin');
     }
 
     //auth User
@@ -116,5 +116,15 @@ class AuthController extends Controller
         ]);
 
         return redirect()->route('login-user')->with('Success','Selamat Anda Sudah Terdaftar');
+    }
+
+    public function logoutUser(Request $request){
+        Auth::guard('web')->logout();//authentication logout
+
+        $request->session()->invalidate(); //request di simpan di session
+
+        $request->session()->regenerateToken();
+
+        return redirect('/login');
     }
 }
