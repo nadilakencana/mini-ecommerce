@@ -92,7 +92,7 @@
                     <div class="content-cart card-body">
                         <div class="total d-flex justify-content-between">
                             <div class="label-total-cart">Total Item </div>
-                            <div class="label-total-cart"> 3 item</div>
+                            <div class="label-total-cart"> {{ count(Session::get('cart')) }} item</div>
                         </div>
                         <div class="total d-flex justify-content-between">
                             <div class="label-total-cart">Sub Total </div>
