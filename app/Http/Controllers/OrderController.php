@@ -9,19 +9,20 @@ class OrderController extends Controller
 {
     public function DataOrders(){
         $order = Order::all();
+
         // $orders = Order::findOrFail(1);
         // $itmOrder = DetailOrder::where('id_order', $orders->id)->get();
         return view('DasboardAdmin.Order.index', compact('order'));
     }
 
-    public function DetailsOrder($id){
-        $dec = decrypt($id);
-        $order = Order::findOrFail($dec);
-        $itmOrder = DetailOrder::where('id_order', $order->id)->get();
+    // public function DetailsOrder($id){
+    //     $dec = decrypt($id);
+    //     $order = Order::findOrFail($dec);
+    //     $itmOrder = DetailOrder::where('id_order', $order->id)->get();
 
-        return view('DasboardAdmin.Order.detail', compact('order', 'itmOrder'));
+    //     return view('DasboardAdmin.Order.detail', compact('order', 'itmOrder'));
 
-    }
+    // }
 
     public function AcceptOrder(Request $request, $id){
 
@@ -64,7 +65,7 @@ class OrderController extends Controller
         $dec = decrypt($id);
         $order = Order::findOrFail($dec);
         $itmOrder = DetailOrder::where('id_order', $order->id)->get();
-
-        return view('DasboardAdmin.Order.invoice', compact('order', 'itmOrder'));
+        $count = $itmOrder->count();
+        return view('DasboardAdmin.Order.invoice', compact('order', 'itmOrder', 'count'));
     }
 }

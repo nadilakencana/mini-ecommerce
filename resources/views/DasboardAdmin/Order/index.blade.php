@@ -52,49 +52,126 @@
                             <td>{{ $orders->status }}</td>
                             <td>
                                 <div class="d-flex">
-                                    <div data-id="{{ encrypt($orders->id) }}" class="btn btn-success mx-2 block detail"
-                                        data-bs-toggle="modal" data-bs-target="#default">Detail</div>
-                                    <a href="{{ route('delete_order', encrypt($orders->id)) }}" class="btn btn-danger mx-2">Delete</a>
-                                    <a href="{{ route('Invoice', encrypt($orders->id)) }}" class="btn btn-primary mx-2">Invoice</a>
-                                </div>
-                            </td>
-                            <div class="modal fade text-left" id="default" tabindex="-1" role="dialog"
-                                aria-labelledby="myModalLabel1" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-scrollable" role="document">
-                                    <div class="modal-content" style="width: 600px">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="myModalLabel1">Detail Order</h5>
-                                            <button type="button" class="close rounded-pill" data-bs-dismiss="modal"
-                                                aria-label="Close">
-                                                <i data-feather="x"></i>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
+                                    <button class="btn btn-success mx-2" data-bs-toggle="modal"
+                                        data-bs-target="#staticBackdrop-{{ $orders->id }}">Detail</button>
+                                    <a href="{{ route('delete_order', encrypt($orders->id)) }}"
+                                        class="btn btn-danger mx-2">Delete</a>
+                                    <a href="{{ route('Invoice', encrypt($orders->id)) }}"
+                                        class="btn btn-primary mx-2">Invoice</a>
 
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn" data-bs-dismiss="modal">
-                                                <i class="bx bx-x d-block d-sm-none"></i>
-                                                <span class="d-none d-sm-block">Close</span>
-                                            </button>
-                                            @if ($orders->status == 'OnProses')
-                                            <div  class="btn btn-primary ml-1 accept" data-id="{{ $orders->id }}"
-                                                data-bs-dismiss="modal">
-                                                <i class="bx bx-check d-block d-sm-none"></i>
-                                                <span class="d-none d-sm-block ">Accept Order</span>
-                                            </div>
-                                            @elseif($orders->status == 'Order Accept')
-                                            <div  class="btn btn-success ml-1 finish" data-id="{{ $orders->id }}"
-                                                data-bs-dismiss="modal">
-                                                <i class="bx bx-check d-block d-sm-none"></i>
-                                                <span class="d-none d-sm-block">Finish</span>
-                                            </div>
-                                            @endif
 
+
+                                    <div class="modal fade" id="staticBackdrop-{{ $orders->id }}"
+                                        data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                                        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                        <div class="modal-dialog" style="width: 718px;max-width: 800px;">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Detail Order
+                                                    </h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="content-order" data-id="{{ $orders->id }}">
+                                                        <div class="row detail-customer">
+                                                            <div class="col-md-6">
+                                                                <div class="data-customer d-flex gap-2">
+                                                                    <lebel class="lebel" style="width: 50%">Customer
+                                                                        Name
+                                                                    </lebel>
+                                                                    <div class="data">: {{ $orders->user->name }}</div>
+                                                                </div>
+                                                                <div class="data-customer d-flex gap-2">
+                                                                    <lebel class="lebel" style="width: 50%">Phone Number
+                                                                    </lebel>
+                                                                    <div class="data">: {{ $orders->user->no_hp }}</div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <div class="data-customer d-flex gap-2">
+                                                                    <lebel class="lebel" style="width: 50%">Alamat
+                                                                    </lebel>
+                                                                    <div class="data">: {{ $orders->user->alamat }}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+
+                                                        <table class="table w-100">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Product</th>
+                                                                    <th>Qty</th>
+                                                                    <th>Price</th>
+                                                                    <th>Total</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                @foreach ($orders->details as $itm)
+                                                                <tr>
+                                                                    <td>
+                                                                        <div class="product-spk">
+                                                                            <lebel class="name">{{ $itm->product->nama
+                                                                                }}
+                                                                            </lebel>
+                                                                            <div class="spesifikasi">
+                                                                                <div class="spk-product d-flex gap-2">
+                                                                                    <small for="">Uk</small>
+                                                                                    <small>: {{
+                                                                                        $itm->variasiUkuran->ukuran
+                                                                                        }}</small>
+                                                                                </div>
+                                                                                <div class="spk-product d-flex gap-2">
+                                                                                    <small for="">Color</small>
+                                                                                    <small>: {{
+                                                                                        $itm->variasiWarna->warna
+                                                                                        }}</small>
+                                                                                </div>
+
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>{{ $itm->qty }}</td>
+                                                                    <td>Rp. {{number_format( $itm->harga_product, 0,
+                                                                        ',','.')}}</td>
+                                                                    <td>Rp. {{number_format( $itm->total_item, 0,
+                                                                        ',','.')}}
+                                                                    </td>
+                                                                </tr>
+                                                                @endforeach
+
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-bs-dismiss="modal">
+                                                            Close
+                                                        </button>
+                                                        @if ($orders->status == 'OnProses')
+                                                        <div class="btn btn-primary ml-1 accept"
+                                                            data-id="{{ $orders->id }}" data-bs-dismiss="modal">
+                                                            <i class="bx bx-check d-block d-sm-none"></i>
+                                                            <span class="d-none d-sm-block ">Accept Order</span>
+                                                        </div>
+                                                        @elseif($orders->status == 'Order Accept')
+                                                        <div class="btn btn-success ml-1 finish"
+                                                            data-id="{{ $orders->id }}" data-bs-dismiss="modal">
+                                                            <i class="bx bx-check d-block d-sm-none"></i>
+                                                            <span class="d-none d-sm-block">Finish</span>
+                                                        </div>
+                                                        @endif
+
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
+                            </td>
+
+
                         </tr>
 
                         @endforeach
@@ -111,10 +188,7 @@
 @section('script')
 <script>
     $(()=>{
-        $('.btn.detail').on('click', function(){
-            var id = $(this).attr('data-id');
-            DataDetail(id)
-        });
+
 
         $('.accept').on('click', function(){
             var id = $(this).attr('data-id');
@@ -126,14 +200,7 @@
             UpdateStatus(id, 'finish')
         });
 
-        function DataDetail(id){
-            let URL ="{{ route('detail-order', '') }}"+"/"+id;
-            $.get(URL,  function(result){
-                $(result).appendTo('.modal-content .modal-body');
-            }).fail(function(result){
-                console.log(result);
-            });
-        }
+
 
         function UpdateStatus(id, type){
 

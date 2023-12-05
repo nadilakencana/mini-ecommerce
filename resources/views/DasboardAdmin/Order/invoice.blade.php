@@ -26,19 +26,19 @@
                     <div class="detail-customer d-flex align-content-end flex-column">
                         <div class="data-customer mb-1 d-flex">
                             <label for="" style="width: 50%">Kode Invoice</label>
-                            <div class="dt">: {{ $order->kode_order }}</div>
+                            <div class="dt w-50">: {{ $order->kode_order }}</div>
                         </div>
                         <div class="data-customer mb-1 d-flex">
                             <label for="" style="width: 50%">Name</label>
-                            <div class="dt">: {{ $order->user->name }}</div>
+                            <div class="dt w-50">: {{ $order->user->name }}</div>
                         </div>
                         <div class="data-customer mb-1  d-flex">
                             <label for="" style="width: 50%">Phone</label>
-                            <div class="dt">: {{ $order->user->no_hp }}</div>
+                            <div class="dt w-50">: {{ $order->user->no_hp }}</div>
                         </div>
                         <div class="data-customer mb-1  d-flex">
                             <label for="" style="width: 50%">Address</label>
-                            <div class="dt">: {{ $order->user->alamat }}</div>
+                            <div class="dt w-50">: {{ $order->user->alamat }}</div>
                         </div>
                     </div>
                 </div>
@@ -49,8 +49,8 @@
                         <tr>
                             <th>Product</th>
                             <th>Qty</th>
-                            <th>Price</th>
-                            <th>Total</th>
+                            <th style="text-align: end">Price</th>
+                            <th style="text-align: end">Total</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -81,8 +81,22 @@
                     </tbody>
 
                 </table>
-                <div class="footer-tabel">
-                    .
+                <div class="footer-tabel border-top border-bottom mt-1 d-flex flex-column align-items-end">
+                    <div class="total-invoice d-flex gap-3" style="width: 30%">
+                        <label for="" style="width: 50%">Total Item</label>
+                        <span>:</span>
+                       <div class="dt-total text-end w-50">{{ $count }} Item</div>
+                    </div>
+                    <div class="total-invoice d-flex gap-3" style="width: 30%">
+                        <label for="" style="width: 50%">Subtotal</label>
+                        <span>:</span>
+                       <div class="dt-total text-end w-50" >Rp. {{ number_format ($order->subTotal , 0,',','.')}}</div>
+                    </div>
+                    <div class="total-invoice d-flex gap-3" style="width: 30%">
+                        <label for="" style="width: 50%">Total</label>
+                        <span>:</span>
+                       <div class="dt-total text-end w-50">Rp. {{number_format ($order->total, 0,',','.') }}</div>
+                    </div>
                 </div>
             </div>
         </div>

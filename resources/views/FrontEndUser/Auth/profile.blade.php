@@ -116,60 +116,60 @@
                         </div>
                     </div>
                     <div class="footer text-end mt-4">
-                        <div class="btn btn-dark text-end" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Detail</div>
+                        <div class="btn btn-dark text-end" data-bs-toggle="modal" data-bs-target="#staticBackdrop-{{ $ord->id }}">Detail</div>
                     </div>
                 </div>
-                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog w-75">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Detail Order</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <table class="table w-100">
-                                <thead>
-                                    <tr>
-                                        <th>Product</th>
-                                        <th>Qty</th>
-                                        <th>Price</th>
-                                        <th>Total</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($ord->details as $detail)
+                <div class="modal fade" id="staticBackdrop-{{ $ord->id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog w-75">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="staticBackdropLabel">Detail Order</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <table class="table w-100">
+                                    <thead>
                                         <tr>
-                                            <td>
-                                                <div class="product-detail">
-                                                    <p class="cl-dark">{{ $detail->product->nama }}</p>
-                                                    <div class="img-product" style="width: 30%">
-                                                        <img src="{{ asset('assets/images/product/'.$detail->product->image) }}" alt="" class=" rounded-3 img-fluid">
-                                                    </div>
-                                                    <div class="varian">
-                                                        <div class="var d-flex gap-3">
-                                                            <label for="">Color</label>
-                                                            <div class="var-product">: {{ $detail->variasiWarna->warna }}</div>
-                                                        </div>
-                                                        <div class="var d-flex gap-3">
-                                                            <label for="">Size</label>
-                                                            <div class="var-product">: {{ $detail->variasiUkuran->ukuran }}</div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>{{ $detail->qty }}</td>
-                                            <td>Rp. {{ number_format ($detail->harga_product, 0,',', '.') }}</td>
-                                            <td>Rp. {{ number_format($detail->total_item, 0, ',', '.' )}}</td>
+                                            <th>Product</th>
+                                            <th>Qty</th>
+                                            <th>Price</th>
+                                            <th>Total</th>
                                         </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($ord->details as $detail)
+                                            <tr>
+                                                <td>
+                                                    <div class="product-detail">
+                                                        <p class="cl-dark">{{ $detail->product->nama }}</p>
+                                                        <div class="img-product" style="width: 30%">
+                                                            <img src="{{ asset('assets/images/product/'.$detail->product->image) }}" alt="" class=" rounded-3 img-fluid">
+                                                        </div>
+                                                        <div class="varian">
+                                                            <div class="var d-flex gap-3">
+                                                                <label for="">Color</label>
+                                                                <div class="var-product">: {{ $detail->variasiWarna->warna }}</div>
+                                                            </div>
+                                                            <div class="var d-flex gap-3">
+                                                                <label for="">Size</label>
+                                                                <div class="var-product">: {{ $detail->variasiUkuran->ukuran }}</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>{{ $detail->qty }}</td>
+                                                <td>Rp. {{ number_format ($detail->harga_product, 0,',', '.') }}</td>
+                                                <td>Rp. {{ number_format($detail->total_item, 0, ',', '.' )}}</td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            </div>
                         </div>
                     </div>
-                </div>
                 </div>
                 @endforeach
 
