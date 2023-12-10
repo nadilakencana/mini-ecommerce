@@ -43,7 +43,10 @@
                     </div>
 
                 @endforeach
-                
+
+                <nav class="nav-pagination pagination-dark text-end cl-dark">
+                    {{ $product->links() }}
+                </nav>
             </div>
         </div>
     </div>

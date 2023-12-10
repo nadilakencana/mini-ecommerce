@@ -18,7 +18,7 @@ class HomeController extends Controller
 
     public function allProduct(){
         $kategori = Kategori::all();
-        $product = Product::latest()->filter(request(['search']))->paginate(9);
+        $product = Product::latest()->filter(request(['search']))->paginate(3);
         return view('FrontEndUser.HomeCustomer.product_all', compact('kategori', 'product'));
     }
 

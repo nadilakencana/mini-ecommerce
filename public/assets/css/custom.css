@@ -173,4 +173,17 @@ img.img-fluid.img-user {
     display: none;
 }
 /* endProfile */
+/* pagination */
+nav.nav-pagination {
+    display: flex;
+    justify-content: flex-end;
+}
+.page-link {
+    color: black;
+}
+li.page-item.active .page-link {
+    background-color: black;
+    color: white;
+}
+/* end pagination */
 /* end content customer */
