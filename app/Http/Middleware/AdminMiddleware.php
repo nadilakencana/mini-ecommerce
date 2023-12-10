@@ -19,6 +19,9 @@ class AdminMiddleware
         if(!Auth::guard('admins')->check(['email' => $request->email, 'password' => $request->password])){
             return redirect()->route('login');
         }
+        if(Auth::guard('admins')->check(['email' => $request->email, 'password' => $request->password])){
+            config(['session.lifetime' => 120]);
+        }
         return $next($request);
     }
 }

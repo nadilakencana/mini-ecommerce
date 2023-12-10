@@ -60,7 +60,7 @@ Route::middleware(['user'])->group(function(){
 });
 
 
-Route::middleware(['admins'])->group(function () {
+Route::middleware(['admins', 'admins'])->group(function () {
     Route::controller(DasboardAdminController::class)->group(function(){
         Route::get('/dashboard', 'Dasboard')->name('dasboard');
     });
